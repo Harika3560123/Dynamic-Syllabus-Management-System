@@ -488,7 +488,7 @@ def api_admin_users():
     return jsonify([dict(r) for r in rows])
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', 8000))
     print(f"===============================================================")
     print(f"  SANTHIRAM ENGINEERING COLLEGE - NANDYAL (AUTONOMOUS)")
     print(f"  Dynamic Syllabus Management System Backend Server")

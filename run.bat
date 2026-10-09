@@ -1,5 +1,5 @@
 @echo off
-title Dynamic Syllabus Management System - SREC Nandyal
+title Dynamic Syllabus Management System - SREC Nandyal (Port 8000)
 echo ======================================================================
 echo    SANTHIRAM ENGINEERING COLLEGE (AUTONOMOUS) - NANDYAL
 echo    Department of Computer Science & Engineering
@@ -14,12 +14,12 @@ if %errorlevel% neq 0 (
     exit /b
 )
 
-echo Starting Flask Backend Server (backend/app.py)...
+echo Starting Flask Backend Server on Port 8000 (backend/app.py)...
 echo Serving Frontend from: frontend/
-echo Server URL: http://localhost:5000
+echo Server URL: http://localhost:8000
 echo.
 
-start "" "http://localhost:5000"
+start "" "http://localhost:8000"
 cd backend
 python app.py
 
