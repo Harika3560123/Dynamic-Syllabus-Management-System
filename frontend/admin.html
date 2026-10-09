@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty & Admin Portal - Dynamic Syllabus Management | SREC Nandyal</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #081b29;
+            color: #ededed;
+            min-height: 100vh;
+        }
+
+        .admin-nav {
+            background: #020c1b;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #00eeff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .admin-nav h2 {
+            font-size: 22px;
+            color: #00eeff;
+        }
+
+        .admin-nav h2 span {
+            color: #fff;
+        }
+
+        .nav-actions a {
+            color: #ededed;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-actions a:hover {
+            color: #00eeff;
+        }
+
+        .btn-portal-back {
+            background: #00eeff;
+            color: #000 !important;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 238, 255, 0.3);
+            border-radius: 12px;
+            padding: 22px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: #00eeff;
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0, 238, 255, 0.2);
+        }
+
+        .stat-icon {
+            font-size: 42px;
+            color: #00eeff;
+            background: rgba(0, 238, 255, 0.1);
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .stat-info h3 {
+            font-size: 26px;
+            color: #fff;
+        }
+
+        .stat-info p {
+            color: #8892b0;
+            font-size: 13px;
+            margin-top: 2px;
+        }
+
+        .tab-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .tab-button {
+            background: transparent;
+            border: 1px solid transparent;
+            color: #aaa;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .tab-button.active {
+            background: rgba(0, 238, 255, 0.15);
+            border-color: #00eeff;
+            color: #00eeff;
+        }
+
+        .portal-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 238, 255, 0.25);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .portal-card h3 {
+            font-size: 19px;
+            color: #00eeff;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: #ccd6f6;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .form-group select option {
+            background: #020c1b;
+            color: #fff;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #00eeff;
+        }
+
+        .btn-action {
+            background: #00eeff;
+            color: #000;
+            font-weight: 700;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-action:hover {
+            background: #fff;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(0, 238, 255, 0.15);
+            color: #00eeff;
+            padding: 12px;
+            border-bottom: 2px solid #00eeff;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            color: #ccd6f6;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .badge-student { background: rgba(0, 238, 255, 0.2); color: #00eeff; }
+        .badge-admin { background: rgba(255, 170, 0, 0.2); color: #ffaa00; }
+        .badge-faculty { background: rgba(46, 213, 115, 0.2); color: #2ed573; }
+
+        .alert-banner {
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .alert-success { background: rgba(46, 213, 115, 0.2); border: 1px solid #2ed573; color: #a8f5cc; }
+        .alert-error { background: rgba(255, 75, 75, 0.2); border: 1px solid #ff4b4b; color: #ffb3b3; }
+    </style>
+</head>
+<body>
+    <nav class="admin-nav">
+        <h2>S<span>R</span>E<span>C</span> Faculty & Admin Portal</h2>
+        <div class="nav-actions">
+            <a href="Main.html" class="btn-portal-back"><i class='bx bx-arrow-back'></i> Return to Portal</a>
+            <a href="javascript:void(0)" onclick="handleLogout()"><i class='bx bx-log-out'></i> Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="alertBox" class="alert-banner"></div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class='bx bxs-file-pdf stat-icon'></i>
+                <div class="stat-info">
+                    <h3 id="statMaterials">-</h3>
+                    <p>Study Materials / PDFs</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class='bx bxs-book-bookmark stat-icon'></i>
+                <div class="stat-info">
+                    <h3 id="statSubjects">-</h3>
+                    <p>Total Subjects Indexed</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class='bx bxs-user-account stat-icon'></i>
+                <div class="stat-info">
+                    <h3 id="statUsers">-</h3>
+                    <p>Registered Students/Staff</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class='bx bxs-message-dots stat-icon'></i>
+                <div class="stat-info">
+                    <h3 id="statMessages">-</h3>
+                    <p>Student Inquiries/Feedback</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-bar">
+            <button class="tab-button active" onclick="switchSection('uploadSec')"><i class='bx bx-cloud-upload'></i> Upload Study Notes</button>
+            <button class="tab-button" onclick="switchSection('noticeSec')"><i class='bx bx-broadcast'></i> Post Syllabus Notice</button>
+            <button class="tab-button" onclick="switchSection('messagesSec')"><i class='bx bx-envelope'></i> Student Inquiries (<span id="inquiryCount">0</span>)</button>
+            <button class="tab-button" onclick="switchSection('usersSec')"><i class='bx bx-group'></i> Registered Users</button>
+        </div>
+
+        <!-- Section 1: Upload Study Notes -->
+        <div id="uploadSec" class="portal-card">
+            <h3><i class='bx bx-upload'></i> Dynamic Syllabus Study Material Uploader</h3>
+            <p style="color:#aaa; font-size:13px; margin-bottom:18px;">Upload newly revised lecture notes, textbooks, or unit study materials (.pdf, .docx, .pptx). They will be instantly accessible to all students.</p>
+            
+            <form id="uploadForm" onsubmit="handleUpload(event)" enctype="multipart/form-data">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="upSubject">Subject Name</label>
+                        <input type="text" id="upSubject" placeholder="e.g. Operating Systems / Machine Learning" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="upSem">Semester</label>
+                        <select id="upSem" required>
+                            <option value="SEM-1">SEM-1 (B.Tech)</option>
+                            <option value="SEM-2">SEM-2 (B.Tech)</option>
+                            <option value="SEM-3" selected>SEM-3 (B.Tech)</option>
+                            <option value="SEM-4">SEM-4 (B.Tech)</option>
+                            <option value="SEM-5">SEM-5 (B.Tech)</option>
+                            <option value="SEM-6">SEM-6 (B.Tech)</option>
+                            <option value="SEM-7">SEM-7 (B.Tech)</option>
+                            <option value="SEM--1">PG SEM-1 (MBA/MCA)</option>
+                            <option value="SEM--2">PG SEM-2</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="upReg">Regulation</label>
+                        <select id="upReg">
+                            <option value="R23" selected>R23 (Latest JNTUA/Autonomous)</option>
+                            <option value="R20">R20</option>
+                            <option value="R21">R21</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="upUnit">Unit Number</label>
+                        <select id="upUnit">
+                            <option value="1">Unit 1</option>
+                            <option value="2">Unit 2</option>
+                            <option value="3">Unit 3</option>
+                            <option value="4">Unit 4</option>
+                            <option value="5">Unit 5</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="upFile">Select File (.pdf, .docx, .pptx)</label>
+                        <input type="file" id="upFile" accept=".pdf,.docx,.pptx" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="upBy">Uploaded By (Faculty Name)</label>
+                        <input type="text" id="upBy" value="Dr. Farooq Sunar Mahammad (HOD)">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-action" id="uploadBtn"><i class='bx bx-check-circle'></i> Upload & Publish to Portal</button>
+            </form>
+        </div>
+
+        <!-- Section 2: Post Syllabus Notice -->
+        <div id="noticeSec" class="portal-card" style="display: none;">
+            <h3><i class='bx bx-notification'></i> Post Dynamic Syllabus Circular / Notice</h3>
+            <form id="noticeForm" onsubmit="handleNoticeSubmit(event)">
+                <div class="form-group">
+                    <label for="noticeTitle">Notice Title</label>
+                    <input type="text" id="noticeTitle" placeholder="e.g. Revised AI/ML Lab Syllabus for R23" required>
+                </div>
+                <div class="form-group">
+                    <label for="noticeDesc">Detailed Description</label>
+                    <textarea id="noticeDesc" rows="4" placeholder="Enter syllabus updates, textbook references, or circular details..." required></textarea>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="noticeDept">Target Department</label>
+                        <select id="noticeDept">
+                            <option value="All">All Departments</option>
+                            <option value="CSE">Computer Science & Engineering</option>
+                            <option value="AIML">AI / Machine Learning</option>
+                            <option value="ECE">ECE</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="noticePoster">Posted By</label>
+                        <input type="text" id="noticePoster" value="HOD / Project Guide">
+                    </div>
+                </div>
+                <button type="submit" class="btn-action" id="noticeBtn"><i class='bx bx-broadcast'></i> Broadcast Notice</button>
+            </form>
+        </div>
+
+        <!-- Section 3: Student Inquiries / Feedback -->
+        <div id="messagesSec" class="portal-card" style="display: none;">
+            <h3><i class='bx bx-message-rounded-dots'></i> Student Inquiries & Feedback</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Student Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="messagesTableBody">
+                        <tr><td colspan="6" style="text-align:center;">Loading messages...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Section 4: Registered Users -->
+        <div id="usersSec" class="portal-card" style="display: none;">
+            <h3><i class='bx bx-user-check'></i> Registered Portal Users</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Reg / Roll No</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Branch</th>
+                            <th>Role</th>
+                            <th>Registered Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <tr><td colspan="6" style="text-align:center;">Loading users...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showAlert(msg, isSuccess = false) {
+            const box = document.getElementById('alertBox');
+            box.textContent = msg;
+            box.className = 'alert-banner ' + (isSuccess ? 'alert-success' : 'alert-error');
+            box.style.display = 'block';
+            setTimeout(() => { box.style.display = 'none'; }, 5000);
+        }
+
+        function switchSection(secId) {
+            ['uploadSec', 'noticeSec', 'messagesSec', 'usersSec'].forEach(id => {
+                document.getElementById(id).style.display = (id === secId) ? 'block' : 'none';
+            });
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (secId === 'messagesSec') loadMessages();
+            if (secId === 'usersSec') loadUsers();
+        }
+
+        async function loadStats() {
+            try {
+                const res = await fetch('/api/admin/stats');
+                const stats = await res.json();
+                document.getElementById('statMaterials').textContent = stats.total_materials;
+                document.getElementById('statSubjects').textContent = stats.total_subjects;
+                document.getElementById('statUsers').textContent = stats.total_users;
+                document.getElementById('statMessages').textContent = stats.total_messages;
+                document.getElementById('inquiryCount').textContent = stats.total_messages;
+            } catch(e) {
+                console.error("Stats load error:", e);
+            }
+        }
+
+        async function loadMessages() {
+            try {
+                const res = await fetch('/api/admin/messages');
+                const msgs = await res.json();
+                const tbody = document.getElementById('messagesTableBody');
+                if (!msgs || msgs.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No inquiries yet.</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = msgs.map(m => `
+                    <tr>
+                        <td>#${m.id}</td>
+                        <td><strong>${m.name}</strong></td>
+                        <td>${m.email}</td>
+                        <td>${m.phone || 'N/A'}</td>
+                        <td>${m.message}</td>
+                        <td>${new Date(m.created_at).toLocaleString()}</td>
+                    </tr>
+                `).join('');
+            } catch(e) {
+                console.error("Messages error:", e);
+            }
+        }
+
+        async function loadUsers() {
+            try {
+                const res = await fetch('/api/admin/users');
+                const users = await res.json();
+                const tbody = document.getElementById('usersTableBody');
+                if (!users || users.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No users registered.</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = users.map(u => `
+                    <tr>
+                        <td><strong>${u.reg_no || 'N/A'}</strong></td>
+                        <td>${u.name}</td>
+                        <td>${u.email}</td>
+                        <td>${u.branch || 'CSE'}</td>
+                        <td><span class="badge badge-${u.role}">${u.role.toUpperCase()}</span></td>
+                        <td>${new Date(u.created_at).toLocaleDateString()}</td>
+                    </tr>
+                `).join('');
+            } catch(e) {
+                console.error("Users error:", e);
+            }
+        }
+
+        async function handleUpload(e) {
+            e.preventDefault();
+            const btn = document.getElementById('uploadBtn');
+            const fileInput = document.getElementById('upFile');
+            if (!fileInput.files || fileInput.files.length === 0) {
+                showAlert("Please select a file to upload.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            formData.append('subject_name', document.getElementById('upSubject').value);
+            formData.append('semester', document.getElementById('upSem').value);
+            formData.append('regulation', document.getElementById('upReg').value);
+            formData.append('unit_number', document.getElementById('upUnit').value);
+            formData.append('unit_label', `UNIT-${document.getElementById('upUnit').value}`);
+            formData.append('uploaded_by', document.getElementById('upBy').value);
+
+            btn.disabled = true;
+            btn.innerHTML = "<i class='bx bx-loader-alt bx-spin'></i> Uploading...";
+
+            try {
+                const res = await fetch('/api/materials/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showAlert(data.message, true);
+                    document.getElementById('uploadForm').reset();
+                    loadStats();
+                } else {
+                    showAlert(data.message || "Upload failed.");
+                }
+            } catch(err) {
+                showAlert("Upload error connecting to server.");
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = "<i class='bx bx-check-circle'></i> Upload & Publish to Portal";
+            }
+        }
+
+        async function handleNoticeSubmit(e) {
+            e.preventDefault();
+            const title = document.getElementById('noticeTitle').value.trim();
+            const description = document.getElementById('noticeDesc').value.trim();
+            const department = document.getElementById('noticeDept').value;
+            const posted_by = document.getElementById('noticePoster').value;
+            const btn = document.getElementById('noticeBtn');
+
+            btn.disabled = true;
+            try {
+                const res = await fetch('/api/updates', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, description, department, posted_by })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showAlert(data.message, true);
+                    document.getElementById('noticeForm').reset();
+                    loadStats();
+                } else {
+                    showAlert(data.message || "Failed to post notice.");
+                }
+            } catch(err) {
+                showAlert("Error connecting to server.");
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('srec_token');
+            localStorage.removeItem('srec_user');
+            window.location.href = 'index.html';
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadStats();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+h1{
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+h1 span{
+    color: aqua;
+}
+h2{
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+p{
+    color: antiquewhite;
+    font-size: 1.6cm;
+}
+body{
+    background-color: black;
+}
+.contact-icon a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid #0ef;
+    border-radius: 2%;
+    font-size: 20px;
+    color: #0ef;
+    text-decoration: none;
+    margin: 0px 40px 0px 60px;
+    opacity: 1;
+    
+}

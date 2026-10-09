@@ -1,0 +1,28 @@
+# Python Bytecode & Environments
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+venv/
+.venv/
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Ignore heavy bulk study material archives (>1.2 GB total) so GitHub push succeeds fast
+# Note: All 211 files remain safely on your computer in frontend/materials/
+frontend/materials/*.pdf
+frontend/materials/*.PDF
+frontend/materials/*.docx
+frontend/materials/*.pptx
+
+# Keep core project synopsis and sample unit notes in GitHub repository
+!frontend/materials/miniproject[1].pdf
+!frontend/materials/unit-1(dbms).pdf
+!frontend/materials/unit-1(adsa).pdf
+!frontend/materials/unit-1(dti).pdf
+!frontend/materials/UHV-UNIT-1.pdf
+!frontend/materials/I-I-BCME UNIT 1.pdf

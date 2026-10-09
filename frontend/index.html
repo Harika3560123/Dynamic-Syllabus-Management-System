@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Dynamic Syllabus Management System | SREC Nandyal</title>
+  <link rel="stylesheet" href="style.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', Arial, sans-serif;
+    }
+
+    body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)), url('ex.jpg');
+        background-size: cover;
+        background-position: center;
+        padding: 20px;
+    }
+
+    .container {
+        background: rgba(22, 28, 36, 0.92);
+        padding: 35px 30px;
+        border-radius: 14px;
+        box-shadow: 0 10px 30px rgba(0, 238, 255, 0.25);
+        border: 1px solid rgba(0, 238, 255, 0.4);
+        width: 100%;
+        max-width: 440px;
+        color: #fff;
+        backdrop-filter: blur(8px);
+    }
+
+    .clg-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .clg-header h2 {
+        font-size: 26px;
+        color: #00eeff;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .clg-header h2 span {
+        color: #fff;
+    }
+
+    .clg-header p {
+        font-size: 13px;
+        color: #b0c4de;
+        margin-top: 4px;
+    }
+
+    .form-tabs {
+        display: flex;
+        margin-bottom: 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .tab-btn {
+        flex: 1;
+        padding: 10px;
+        background: transparent;
+        border: none;
+        color: #aaa;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-bottom: 3px solid transparent;
+    }
+
+    .tab-btn.active {
+        color: #00eeff;
+        border-bottom: 3px solid #00eeff;
+    }
+
+    .input-group {
+        margin-bottom: 16px;
+        text-align: left;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 13px;
+        color: #e0e0e0;
+        font-weight: 500;
+    }
+
+    .input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .input-wrapper i {
+        position: absolute;
+        left: 12px;
+        color: #00eeff;
+        font-size: 18px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 12px 14px 12px 40px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        color: #fff;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+    select option {
+        background: #1a222e;
+        color: #fff;
+    }
+
+    input:focus, select:focus {
+        border-color: #00eeff;
+        background: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 0 8px rgba(0, 238, 255, 0.3);
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #00eeff, #0088cc);
+        color: #000;
+        font-weight: 700;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 238, 255, 0.4);
+    }
+
+    .alert {
+        padding: 10px 14px;
+        border-radius: 6px;
+        font-size: 13px;
+        margin-bottom: 16px;
+        display: none;
+    }
+
+    .alert-error {
+        background: rgba(255, 75, 75, 0.2);
+        border: 1px solid #ff4b4b;
+        color: #ffb3b3;
+    }
+
+    .alert-success {
+        background: rgba(46, 213, 115, 0.2);
+        border: 1px solid #2ed573;
+        color: #a8f5cc;
+    }
+
+    .demo-creds {
+        margin-top: 22px;
+        padding-top: 15px;
+        border-top: 1px dashed rgba(255,255,255,0.2);
+        font-size: 12px;
+        color: #aaa;
+    }
+
+    .demo-creds p {
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #00eeff;
+    }
+
+    .demo-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .demo-badge {
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(0,238,255,0.3);
+        color: #e0e0e0;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .demo-badge:hover {
+        background: #00eeff;
+        color: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="clg-header">
+      <h2>S<span>R</span>E<span>C</span> PORTAL</h2>
+      <p>Dynamic Syllabus Management for Higher Studies</p>
+      <p style="font-size: 11px; color: #8899aa; margin-top: 2px;">Santhiram Engineering College : Nandyal (Autonomous)</p>
+    </div>
+
+    <div class="form-tabs">
+      <button class="tab-btn active" id="tabLogin" onclick="switchTab('login')">Student / Faculty Login</button>
+      <button class="tab-btn" id="tabRegister" onclick="switchTab('register')">New Student Register</button>
+    </div>
+
+    <div id="alertBox" class="alert"></div>
+
+    <!-- Login Form -->
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="input-group">
+        <label for="loginEmail">College Email or Roll Number</label>
+        <div class="input-wrapper">
+          <i class='bx bx-envelope'></i>
+          <input type="email" id="loginEmail" placeholder="e.g. 23x51a0532@srecnandyal.edu.in" required>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="loginPassword">Password</label>
+        <div class="input-wrapper">
+          <i class='bx bx-lock-alt'></i>
+          <input type="password" id="loginPassword" placeholder="Enter password" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" id="loginBtn">
+        <i class='bx bx-log-in-circle'></i> Sign In
+      </button>
+    </form>
+
+    <!-- Register Form -->
+    <form id="registerForm" onsubmit="handleRegister(event)" style="display: none;">
+      <div class="input-group">
+        <label for="regName">Full Name</label>
+        <div class="input-wrapper">
+          <i class='bx bx-user'></i>
+          <input type="text" id="regName" placeholder="e.g. B. HARIKA" required>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="regRoll">Roll Number / Reg No</label>
+        <div class="input-wrapper">
+          <i class='bx bx-id-card'></i>
+          <input type="text" id="regRoll" placeholder="e.g. 23X51A0532" required>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="regBranch">Department / Branch</label>
+        <div class="input-wrapper">
+          <i class='bx bx-book-reader'></i>
+          <select id="regBranch">
+            <option value="CSE">Computer Science & Engineering (CSE)</option>
+            <option value="AIML">Artificial Intelligence & Machine Learning (AI/ML)</option>
+            <option value="CSE_DS">CSE - Data Science</option>
+            <option value="ECE">Electronics & Communication (ECE)</option>
+            <option value="EEE">Electrical & Electronics (EEE)</option>
+            <option value="CIVIL">Civil Engineering</option>
+            <option value="MBA">MBA</option>
+            <option value="MCA">MCA</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="regEmail">College Email</label>
+        <div class="input-wrapper">
+          <i class='bx bx-envelope'></i>
+          <input type="email" id="regEmail" placeholder="e.g. yourname@srecnandyal.edu.in" required>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="regPassword">Create Password</label>
+        <div class="input-wrapper">
+          <i class='bx bx-lock'></i>
+          <input type="password" id="regPassword" placeholder="Minimum 4 characters" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" id="regBtn">
+        <i class='bx bx-user-plus'></i> Register Student
+      </button>
+    </form>
+
+    <!-- Quick Demo Credentials -->
+    <div class="demo-creds">
+      <p><i class='bx bx-bulb'></i> One-Click Demo Credentials (Project Team):</p>
+      <div class="demo-buttons">
+        <span class="demo-badge" onclick="fillDemo('23x51a0532@srecnandyal.edu.in', 'srec@1234')">Harika (23X51A0532)</span>
+        <span class="demo-badge" onclick="fillDemo('23x51a0530@srecnandyal.edu.in', 'srec@1234')">Kavya (23X51A0530)</span>
+        <span class="demo-badge" onclick="fillDemo('23x51a0518@srecnandyal.edu.in', 'srec@1234')">Rajakumari (23X51A0518)</span>
+        <span class="demo-badge" onclick="fillDemo('23x51ao520@srecnandyal.edu.in', 'srec@1234')">Manisha (23X51A0520)</span>
+        <span class="demo-badge" onclick="fillDemo('admin@srecnandyal.edu.in', 'admin123')" style="border-color:#ffb84d; color:#ffb84d;">Faculty Admin</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showAlert(msg, isSuccess = false) {
+      const box = document.getElementById('alertBox');
+      box.textContent = msg;
+      box.className = 'alert ' + (isSuccess ? 'alert-success' : 'alert-error');
+      box.style.display = 'block';
+    }
+
+    function switchTab(tab) {
+      document.getElementById('alertBox').style.display = 'none';
+      if (tab === 'login') {
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('registerForm').style.display = 'none';
+        document.getElementById('tabLogin').classList.add('active');
+        document.getElementById('tabRegister').classList.remove('active');
+      } else {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('registerForm').style.display = 'block';
+        document.getElementById('tabLogin').classList.remove('active');
+        document.getElementById('tabRegister').classList.add('active');
+      }
+    }
+
+    function fillDemo(email, pass) {
+      switchTab('login');
+      document.getElementById('loginEmail').value = email;
+      document.getElementById('loginPassword').value = pass;
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      const btn = document.getElementById('loginBtn');
+
+      btn.disabled = true;
+      btn.innerHTML = "<i class='bx bx-loader-alt bx-spin'></i> Signing In...";
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          showAlert(data.message || "Login successful! Redirecting...", true);
+          localStorage.setItem('srec_token', data.token);
+          localStorage.setItem('srec_user', JSON.stringify(data.user));
+          setTimeout(() => {
+            window.location.href = 'Main.html';
+          }, 800);
+        } else {
+          showAlert(data.message || "Invalid credentials. Please try again.");
+          btn.disabled = false;
+          btn.innerHTML = "<i class='bx bx-log-in-circle'></i> Sign In";
+        }
+      } catch (err) {
+        const validUsers = {
+          "23x51a0532@srecnandyal.edu.in": "srec@1234",
+          "23x51a0530@srecnandyal.edu.in": "srec@1234",
+          "23x51ao520@srecnandyal.edu.in": "srec@1234",
+          "23x51a0518@srecnandyal.edu.in": "srec@1234",
+          "admin@srecnandyal.edu.in": "admin123"
+        };
+        if (validUsers[email] && validUsers[email] === password) {
+          localStorage.setItem('srec_user', JSON.stringify({ name: email.split('@')[0].toUpperCase(), email, role: 'student' }));
+          showAlert("Login successful! Redirecting...", true);
+          setTimeout(() => { window.location.href = 'Main.html'; }, 800);
+        } else {
+          showAlert("Connection error or invalid credentials.");
+          btn.disabled = false;
+          btn.innerHTML = "<i class='bx bx-log-in-circle'></i> Sign In";
+        }
+      }
+    }
+
+    async function handleRegister(e) {
+      e.preventDefault();
+      const name = document.getElementById('regName').value.trim();
+      const reg_no = document.getElementById('regRoll').value.trim();
+      const branch = document.getElementById('regBranch').value;
+      const email = document.getElementById('regEmail').value.trim();
+      const password = document.getElementById('regPassword').value.trim();
+      const btn = document.getElementById('regBtn');
+
+      btn.disabled = true;
+      btn.innerHTML = "<i class='bx bx-loader-alt bx-spin'></i> Registering...";
+
+      try {
+        const res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, reg_no, branch, email, password })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          showAlert(data.message, true);
+          setTimeout(() => {
+            switchTab('login');
+            document.getElementById('loginEmail').value = email;
+            document.getElementById('loginPassword').value = password;
+          }, 1500);
+        } else {
+          showAlert(data.message || "Registration failed.");
+        }
+      } catch (err) {
+        showAlert("Failed to connect to backend server.");
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = "<i class='bx bx-user-plus'></i> Register Student";
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (!document.getElementById('loginEmail').value) {
+        fillDemo('23x51a0532@srecnandyal.edu.in', 'srec@1234');
+      }
+    });
+  </script>
+</body>
+</html>

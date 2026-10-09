@@ -1,0 +1,793 @@
+@import url('https://fonts.googleapis.com/css2?family=poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', 'sans-serif';
+
+}
+body{
+    color: #ededed;
+}
+
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 10px;
+    background-color:#000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+.logo{
+    font-size: 37px;
+    color: #00a2ff;
+    text-decoration: none;
+    font-weight: 900px;
+    font-family: Algerian;
+
+}
+.logo span{
+    width: 100px;
+    color: aliceblue;
+    font-family: Algerian;
+    font-size: 37px;
+}
+.navbar a {
+    font-size: 18px;
+    color: #ededed;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 35px;
+    transition: .3s;
+}
+.navbar a:hover,
+.navbar a:active {
+    color: #00abf0;
+}
+
+.home{
+    background-image: url(clg.png);
+    height: 100vh;
+
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+}
+
+.home-content {
+    max-width: 600px;
+}
+.home-content h1{
+    color: #000;
+    font-size: 56px;
+    font-weight: 700;
+
+}
+.home-content h1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background: #081b29;
+    animation: showright 1s ease forwards;
+    animation-delay: 1s;
+
+}
+.home-content h3{
+    font-size: 25px;
+    font-weight: 700;
+    color: #00abf0;
+}
+.home-content p{
+    font-size: 16px;
+    margin: 20px 0 40px;
+    color: rgb(0, 0, 0);
+}
+.home-sci {
+    position: absolute;
+    bottom: 40px;
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.home-sci a{
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid #000000;
+    border-radius: 20%;
+    font-size: 20px;
+    color: #000000;
+    text-decoration: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.home-sci a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: rgb(69, 198, 227);
+    z-index: -1;
+    transition: .5s;
+}
+
+.home-sci a:hover::before{
+    width: 100%;
+}
+/*About*/
+#About{
+    background-color: #000 ;
+    width: 100%;
+    min-height: 50vh;
+    padding: 60px 2%;
+}
+.sub-title3 {
+    text-align: center;
+    font-size: 60px;
+    padding-top: 15px;
+
+    padding-bottom: 1px;
+}
+
+.sub-title3 span {
+    color: #0ef;
+}
+.imagepoint{
+    padding-top: 1cm;
+    float: left;
+    border-radius: 20px;
+}
+.ok{
+    font-size: 21.5PX;
+    text-align: initial;
+    padding-left: 15cm;
+    padding-top: 1cm;
+    span{
+        color: #0ef;
+        font-size: 35px;
+    }
+}
+.btn {  height: 4em;
+    width: 10cm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 0px solid black;
+}
+  
+  .wrapper {
+    height: 2em;
+    width: 8em;
+    position: relative;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .text {
+    font-size: 15px;
+    z-index: 1;
+    color: #ffffff;
+    padding: 5px 15px;
+    border-radius: 2px;
+    background: rgb(1, 169, 202);
+    transition: all 0.9s ease;
+  }
+  .text:hover{
+    color: #000;
+    background-color: transparent;
+  }
+  
+  .flower {
+    display: grid;
+    grid-template-columns: 1em 1em;
+    position: absolute;
+    transition: grid-template-columns 0.8s ease;
+  }
+  
+  .flower1 {
+    top: -15px;
+    left: -13px;
+    transform: rotate(5deg);
+  }
+  
+  .flower2 {
+    bottom: -19px;
+    left: 8px;
+    transform: rotate(35deg);
+  }
+  
+  .flower3 {
+    bottom: -15px;
+    transform: rotate(0deg);
+  }
+  
+  .flower4 {
+    top: -14px;
+    transform: rotate(15deg);
+  }
+  
+  .flower5 {
+    right: -9px;
+    top: -3px;
+    transform: rotate(25deg);
+  }
+  
+  .flower6 {
+    right: -15px;
+    bottom: -15px;
+    transform: rotate(30deg);
+  }
+  
+  .petal {
+    height: 1em;
+    width: 1em;
+    border-radius: 40% 70% / 7% 90%;
+    background: linear-gradient(#07a6d7, #93e0ee);
+    border: 0.5px solid #96d1ec;
+    z-index: 0;
+    transition: width 0.3s ease, height 0.8s ease;
+  }
+  
+  .two {
+    transform: rotate(90deg);
+  }
+  
+  .three {
+    transform: rotate(270deg);
+  }
+  
+  .four {
+    transform: rotate(180deg);
+  }
+  
+  .btn:hover .petal {
+    background: linear-gradient(#0761d7, #93bdee);
+    border: 0.5px solid #96b4ec;
+  }
+  
+  .btn:hover .flower {
+    grid-template-columns: 1.5em 1.5em;
+  }
+  
+  .btn:hover .flower .petal {
+    width: 1.5em;
+    height: 1.5em;
+  }
+  
+  .btn:hover .text {
+    background: rgba(255, 255, 255, 0.4);
+  }
+  
+  .btn:hover div.flower1 {
+    animation: 2s linear 0s normal none infinite running flower1;
+  }
+  
+  @keyframes flower1 {
+    0% {
+      transform: rotate(5deg);
+    }
+  
+    100% {
+      transform: rotate(365deg);
+    }
+  }
+  
+  .btn:hover div.flower2 {
+    animation: 3s linear 1s normal none infinite running flower2;
+  }
+  
+  @keyframes flower2 {
+    0% {
+      transform: rotate(35deg);
+    }
+  
+    100% {
+      transform: rotate(-325deg);
+    }
+  }
+  
+  .btn:hover div.flower3 {
+    animation: 6s linear 1s normal none infinite running flower3;
+  }
+  
+  @keyframes flower3 {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .btn:hover div.flower4 {
+    animation: 7s linear 1s normal none infinite running flower4;
+  }
+  
+  @keyframes flower4 {
+    0% {
+      transform: rotate(15deg);
+    }
+  
+    100% {
+      transform: rotate(375deg);
+    }
+  }
+  
+  .btn:hover div.flower5 {
+    animation: 10s linear 1s normal none infinite running flower5;
+  }
+  
+  @keyframes flower5 {
+    0% {
+      transform: rotate(25deg);
+    }
+  
+    100% {
+      transform: rotate(-335deg);
+    }
+  }
+  
+  .btn:hover div.flower6 {
+    animation: 2s linear 1s normal none infinite running flower6;
+  }
+  
+  @keyframes flower6 {
+    0% {
+      transform: rotate(30deg);
+    }
+  
+    100% {
+      transform: rotate(390deg);
+    }
+  }
+/*Branches*/
+#Branches{
+    background-color: #000;
+    width: 100%;
+    min-height: 100vh;
+    padding: 70px 5% 0;
+}
+#Regulation{
+  background-color: #000;
+  width: 100%;
+  min-height: 100vh;
+  padding: 70px 5% 0;
+}
+
+.sub-titles {
+    text-align: center;
+    font-size: 60px;
+    padding-top: 0px;
+    padding-bottom: 70px;
+}
+
+.sub-titles span {
+    color: #0ef;
+}
+
+.prj-lists {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(259px, 1fr));
+    grid-gap: 19px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.prj-lists div {
+    background-color: transparent;
+    padding: 4px;
+    font-size: 13px;
+    font-weight: 13px;
+    border-right: 10px;
+    border-radius: 3px;
+    transition: 0.5s, transform 0.5s;
+    box-shadow: 5px 2px 30px #012290f7, 1px 1px 40px #0053b8f7;
+    border: #0ef 5px solid;
+}
+
+.containers {
+    padding: 5px;
+
+}
+
+.prj-lists div i {
+    font-size: 50px;
+    margin-bottom: 3px;
+}
+
+.prj-lists div h2 {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.prj-lists div a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 34px;
+    margin-top: 3px;
+    display: inline-block;
+}
+
+.read {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #0ef;
+    border-radius: 40px;
+    font-size: 16px;
+    color: #081b29;
+    letter-spacing: 1px;
+    text-decoration: none;
+    font-weight: 600;
+    opacity: 0;
+    animation: slideTop 1s ease forwards;
+    animation-delay: 1s;
+}
+
+.read:hover {
+    box-shadow: 0 0 5px cyan, 0 0 25px cyan, 0 0 50pc cyan, 0 0 100px cyan, 0 0 200px cyan;
+}
+
+.prj-lists div:hover {
+    transform: translateY(-2px);
+}
+/* Semesters*/
+#Semesters{
+    background-color: #000;
+}
+h2{
+    text-align: center;
+    font-size: 40px;
+    background: transparent;
+    border: 5px solid rgb(15, 12, 0);
+    border-radius: 2%;
+}
+.subtitle {
+    text-align: center;
+    font-size: 60px;
+    padding-bottom: 10px;
+    padding-top: 100px;
+}
+.subtitle span {
+    color: #0ef;
+}
+.contact-icon{
+    background-color: #000000;
+}
+.contacts {
+    display: grid;
+    grid-template-columns: repeat (2, 1fr);
+    align-items: center;
+    gap: 3rem;
+    padding: 40px;
+    padding-top: 70px;
+    justify-content: center;
+    background-color: #000;
+}
+.contact-icon a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 90px;
+    background: transparent;
+    border: 2px solid #0ef;
+    border-radius: 500%;
+    font-size: 20px;
+    color: #0ef;
+    text-decoration: none;
+    margin: 20px 1px 30px 49px;
+    opacity: 1;
+}
+.contact-icon a:hover {
+    background: #0ef;
+    color: #000;
+    box-shadow: 0 0 50px #0ef;
+}
+/* Others*/
+
+#Others{
+    background-color: #000;
+}
+
+.sub-title {
+    text-align: center;
+    font-size: 60px;
+    padding-top: 4px;
+    padding-bottom: 7px;
+}
+
+.sub-title span {
+    color: #0ef;
+}
+
+.prj-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(259px, 1fr));
+    grid-gap: 40px;
+    margin-top: 50px;
+}
+
+.prj-list div {
+    background-color: transparent;
+    padding: 40px;
+    font-size: 13px;
+    font-weight: 13px;
+    border-right: 10px;
+    border-radius: 20px;
+    transition: 0.5s, transform 0.5s;
+    box-shadow: 5px 2px 30px #012290f7, 1px 1px 40px #0053b8f7;
+    border: #0ef 5px solid;
+}
+
+.container {
+    padding: 90px;
+
+}
+
+.prj-list div i {
+    font-size: 50px;
+    margin-bottom: 30px;
+}
+
+.prj-list div h2 {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 0px;
+}
+
+.prj-list div a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 50px;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.read {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #0ef;
+    border-radius: 40px;
+    font-size: 16px;
+    color: #081b29;
+    letter-spacing: 1px;
+    text-decoration: none;
+    font-weight: 600;
+    opacity: 0;
+    animation: slideTop 1s ease forwards;
+    animation-delay: 1s;
+}
+
+.read:hover {
+    box-shadow: 0 0 5px cyan, 0 0 25px cyan, 0 0 50pc cyan, 0 0 100px cyan, 0 0 200px cyan;
+}
+
+.prj-list div:hover {
+    transform: translateY(-2px);
+}
+/*contacts*/
+
+.contacts {
+    display: grid;
+    grid-template-columns: repeat (2, 1fr);
+    align-items: center;
+    gap: 3rem;
+    padding: 40px;
+    padding-top: 70px;
+    justify-content: center;
+    background-color: #000;
+}
+
+.contact-text {
+    align-content: center;
+}
+
+.contact-text h2 {
+    font-size: 60px;
+    line-height: normal;
+    text-align: center;
+
+}
+
+.contact-text h2 span {
+    color: #0ef;
+}
+
+.contact-text h4 {
+    margin: 15px 0;
+    color: rgb(228, 228, 228);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.contact-text p{
+    color: rgb(177, 177, 177);
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 2rem;
+}
+.contact-list {
+    margin-bottom: 3rem;
+}
+
+.contact-list li {
+    margin-bottom: 10px;
+    display: block;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.contact-list i {
+    display: inline-block;
+    color: #0ef;
+    font-size: 20px;
+    font-weight: 600;
+    transition: all .40s ease;
+    padding: 10px;
+}
+
+
+.contact-icons i {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid #0ef;
+    border-radius: 50%;
+    font-size: 20px;
+    color: #0ef;
+    text-decoration: none;
+    margin: 0px 15px 0px 0;
+    opacity: 1;
+}
+
+.contact-icons i:hover {
+    background: #0ef;
+    color: #000;
+    box-shadow: 0 0 20px #0ef;
+}
+
+.last-text p{
+    width: 100%;
+    text-align: center;
+    padding: 25px;
+    background: black;
+    font-weight: 300;
+    margin-top: 0px;
+}
+.top{
+    position: fixed;
+    bottom: 2.1rem;
+    left: 1rem;
+    display: flex;
+    opacity: 0;
+    transition: all .4s;
+}
+
+.top.active{
+    bottom: 32px;
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.top i{
+    color: black;
+    background: #0ef;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 0.5rem;
+}
+
+.top i:hover {
+    box-shadow: 0 0 5px cyan,
+    0 0 25px cyan, 0 0 50px cyan,0 0 200px cyan;
+}
+/*secound About page*/
+.bbody{
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+    background-image: url("student1.jpg");
+}
+
+.heading{
+    color: #000;
+    padding-top: 10cm;
+    padding-left: 8cm;
+    font-size: 2cm;
+}
+.prj-list3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(259px, 1fr));
+  grid-gap: 40px;
+  margin-top: 3cm;
+}
+
+.prj-list3 div {
+  background-color: transparent ;
+  padding: 40px;
+  font-size: 13px;
+  font-weight: 13px;
+  border-right: 10px;
+  border-radius: 1.5cm;
+  transition: 0.5s, transform 0.5s;
+  box-shadow: 5px 2px 30px #012290f7, 1px 1px 40px #0053b8f7;
+  border: #0ef 5px solid;
+}
+
+.prj-list3 div i {
+  font-size: 80px;
+  margin-bottom: 3px;
+  text-align: center;
+}
+
+.prj-list3 div h2 {
+  font-size: 40px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  color:#0ef;
+}
+.prj-list3 div p{
+  font-size: 20px;
+}
+
+.prj-list3 div a {
+  text-decoration: none;
+  color: #000;
+  font-size: 25px;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.read {
+  display: inline-block;
+  padding: 12px 2px;
+  background: #0ef;
+  border-radius: 40px;
+  font-size: 30px;
+  color: #081b29;
+  letter-spacing: 1px;
+  text-decoration: none;
+  font-weight: 600;
+  opacity: 0;
+  animation: slideTop 1s ease forwards;
+  animation-delay: 1s;
+}
+
+.read:hover {
+  box-shadow: 0 0 5px cyan, 0 0 25px cyan, 0 0 50pc cyan, 0 0 100px cyan, 0 0 200px cyan;
+}
+
+.prj-list3 div:hover {
+  transform: translateY(-2px);
+}
+
+s
